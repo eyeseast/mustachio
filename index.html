@@ -13,6 +13,7 @@
     <![endif]-->
 
     <!-- Le styles -->
+    <link href="js/codemirror/codemirror.css" rel="stylesheet" type="text/css">
     <link href="less/bootstrap.less" rel="stylesheet/less" type="text/css">
     <style type="text/css">
     body {
@@ -21,9 +22,16 @@
     }
     textarea.template { 
         width: 95%; 
+    }
+    .CodeMirror {
+        border: 1px solid #ddd;
         margin-bottom: 1.3em; 
     }
+    .cm-mustache {
+        color: #0ca;
+    }
     </style>
+    
     <link href="less/responsive.less" rel="stylesheet/less" type="text/css">
     <script src="js/less-1.2.1.min.js"></script>
     <!-- Le fav and touch icons -->
@@ -58,13 +66,13 @@
         <div class="row-fluid">
             <div id="templates" class="span4">
                 <h2>Templates will go here</h2>
-                <form class="form-vertical">
+                <form id="editor" class="form-vertical">
                     <p>
                         <input type="text" name="url" value="" id="url" placeholder="URL to fetch">
                         <input type="button" name="fetch" value="Fetch" id="fetch" class="btn">
                     </p>
                     <textarea name="template" class="input-xlarge template" rows="10"></textarea>
-                    <p><input type="submit" value="Render &rarr;" class="btn-primary"></p>
+                    <p><input type="button" value="Render &rarr;" class="btn btn-primary"></p>
                 </form>
             </div>
             <div id="output" class="span8">
@@ -97,15 +105,29 @@
     <script src="js/bootstrap/bootstrap-transition.js"></script>
     <script src="js/bootstrap/bootstrap-alert.js"></script>
     <script src="js/bootstrap/bootstrap-modal.js"></script>
-    <script src="js/bootstrap/bootstrap-dropdown.js"></script>
-    <script src="js/bootstrap/bootstrap-scrollspy.js"></script>
     <script src="js/bootstrap/bootstrap-tab.js"></script>
     <script src="js/bootstrap/bootstrap-tooltip.js"></script>
     <script src="js/bootstrap/bootstrap-popover.js"></script>
     <script src="js/bootstrap/bootstrap-button.js"></script>
-    <script src="js/bootstrap/bootstrap-collapse.js"></script>
-    <script src="js/bootstrap/bootstrap-carousel.js"></script>
     <script src="js/bootstrap/bootstrap-typeahead.js"></script>
-
+    
+    <!-- codemirror -->
+    <script src="js/codemirror/codemirror.js"></script>
+    <script src="js/codemirror/util/overlay.js"></script>
+    <script src="js/codemirror/mode/xml/xml.js"></script>
+    <script src="js/codemirror/mode/javascript/javascript.js"></script>
+    <script src="js/codemirror/mode/css/css.js"></script>
+    <script src="js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    
+    <!-- the app itself -->
+    <script src="js/lib/sisyphus.min.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/lib/backbone.js"></script>
+    <script src="js/lib/hogan-1.0.5.js"></script>
+    <script src="js/app/mustache-mode.js"></script>
+    <script src="js/app/models.js"></script>
+    <script src="js/app/collections.js"></script>
+    <script src="js/app/views.js"></script>
+    <script src="js/app/initialize.js"></script>
 </body>
 </html>

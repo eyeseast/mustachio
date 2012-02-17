@@ -3,9 +3,13 @@
 var Template = Backbone.Model.extend({
     
     defaults: {
-        url: "",
+        username: "",
         code: ""
     },
     
     localStorage: new Store('template')
+});
+
+var Tweet = Backbone.Model.extend({
+    
 });

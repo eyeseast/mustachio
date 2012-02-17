@@ -65,10 +65,10 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div id="templates" class="span4">
-                <h2>Templates will go here</h2>
+                <h2>Fetch a user's tweets</h2>
                 <form id="editor" class="form-vertical">
                     <p>
-                        <input type="text" name="url" value="" id="url" placeholder="URL to fetch">
+                        <input type="text" name="username" id="username" placeholder="@someone">
                         <input type="button" name="fetch" value="Fetch" id="fetch" class="btn">
                     </p>
                     <textarea id="code" name="template" class="input-xlarge template" rows="10"></textarea>
@@ -85,8 +85,8 @@
                     <div class="tab-pane active" id="rendered">
                         Rendered content...
                     </div>
-                    <div class="tab-pane well" id="data">
-                        Raw data...
+                    <div class="tab-pane" id="data">
+                        <pre><code id="raw-data">Raw data...</code></pre>
                     </div>
                 </div>
             </div>
@@ -126,6 +126,8 @@
     <script src="js/lib/backbone-localstorage.js"></script>
     <script src="js/lib/backbone.modelbinding.js"></script>
     <script src="js/lib/hogan-1.0.5.js"></script>
+    <script src="js/lib/jquery.jsonp.js"></script>
+    
     <script src="js/app/mustache-mode.js"></script>
     <script src="js/app/models.js"></script>
     <script src="js/app/collections.js"></script>

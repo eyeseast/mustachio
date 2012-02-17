@@ -71,7 +71,7 @@
                         <input type="text" name="url" value="" id="url" placeholder="URL to fetch">
                         <input type="button" name="fetch" value="Fetch" id="fetch" class="btn">
                     </p>
-                    <textarea name="template" class="input-xlarge template" rows="10"></textarea>
+                    <textarea id="code" name="template" class="input-xlarge template" rows="10"></textarea>
                     <p><input type="button" value="Render &rarr;" class="btn btn-primary"></p>
                 </form>
             </div>
@@ -123,6 +123,8 @@
     <script src="js/lib/sisyphus.min.js"></script>
     <script src="js/lib/underscore.js"></script>
     <script src="js/lib/backbone.js"></script>
+    <script src="js/lib/backbone-localstorage.js"></script>
+    <script src="js/lib/backbone.modelbinding.js"></script>
     <script src="js/lib/hogan-1.0.5.js"></script>
     <script src="js/app/mustache-mode.js"></script>
     <script src="js/app/models.js"></script>

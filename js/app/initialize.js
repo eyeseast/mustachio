@@ -1,3 +1,4 @@
 jQuery(function($) {
-    window.editor = new Editor();
+    window.template = new Template();
+    window.editor = new Editor({ model: template });
 });

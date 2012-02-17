@@ -1,4 +1,5 @@
 jQuery(function($) {
     window.template = new Template();
-    window.editor = new Editor({ model: template });
+    window.things = new Things();
+    window.editor = new Editor({ model: template, collection: things });
 });

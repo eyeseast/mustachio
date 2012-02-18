@@ -15,7 +15,7 @@ var Editor = Backbone.View.extend({
         Backbone.ModelBinding.bind(this);
         this.codemirror();
         this.model.fetch();
-        this.collection.on('reset', this.renderData);
+        this.collection.on('reset', this.render);
         this.model.on('change:code', this.compile);
     },
     
@@ -32,10 +32,14 @@ var Editor = Backbone.View.extend({
     },
     
     compile: function(model, code, options) {
-        console.log('Code changed:');
-        console.log(code);
-        this.template = Hogan.compile(this.model.get('code'));
-        return this.template;
+        try {
+            this.template = Hogan.compile(this.model.get('code'));
+            this.showMessage('Compiled successfully!', 'alert-info')
+        } catch(e) {
+            this.showMessage(e.message, 'alert-error');
+        }
+        // always return a template
+        return this.template || Hogan.compile("");
     },
     
     fetch: function(e) {
@@ -73,6 +77,7 @@ var Editor = Backbone.View.extend({
     },
     
     render: function() {
+        this.renderData();
         var template = this.template || this.compile()
             data = this.collection.toJSON();
         
@@ -83,5 +88,14 @@ var Editor = Backbone.View.extend({
     renderData: function() {
         var data = this.collection.toJSON();
         $('#raw-data').text(JSON.stringify(data, undefined, 2));
+    },
+    
+    showMessage: function(message, className) {
+        this.$('#message')
+            .removeClass()
+            .addClass('alert')
+            .addClass(className)
+            .text(message);
     }
+    
 });

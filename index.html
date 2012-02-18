@@ -67,12 +67,13 @@
             <div id="templates" class="span4">
                 <h2>Fetch a user's tweets</h2>
                 <form id="editor" class="form-vertical">
-                    <p>
-                        <input type="text" name="username" id="username" placeholder="@someone">
+                    <p class="input-prepend">
+                        <span class="add-on">@</span>
+                        <input type="text" name="username" id="username" placeholder="Twitter username">
                         <input type="button" name="fetch" value="Fetch" id="fetch" class="btn">
                     </p>
                     <textarea id="code" name="template" class="input-xlarge template" rows="10"></textarea>
-                    <p><input type="button" value="Render &rarr;" class="btn btn-primary"></p>
+                    <p><input id="render" type="button" value="Render &rarr;" class="btn btn-primary"></p>
                 </form>
             </div>
             <div id="output" class="span8">
@@ -101,6 +102,12 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script type="x-jst" id="default-template">
+{{#tweets}}
+    <p>{{text}}</p>
+{{/tweets}}
+    </script>
+    
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="js/bootstrap/bootstrap-transition.js"></script>
     <script src="js/bootstrap/bootstrap-alert.js"></script>
@@ -126,7 +133,6 @@
     <script src="js/lib/backbone-localstorage.js"></script>
     <script src="js/lib/backbone.modelbinding.js"></script>
     <script src="js/lib/hogan-1.0.5.js"></script>
-    <script src="js/lib/jquery.jsonp.js"></script>
     
     <script src="js/app/mustache-mode.js"></script>
     <script src="js/app/models.js"></script>

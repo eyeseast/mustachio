@@ -5,15 +5,18 @@ var Editor = Backbone.View.extend({
     el: '#editor',
     
     events: {
-        'click #fetch' : 'fetch'
+        'click #fetch' : 'fetch',
+        'submit'       : 'fetch',
+        'click #render': 'render'
     },
     
     initialize: function(options) {
         _.bindAll(this);
-        this.model.fetch();
-        this.codemirror();
-        this.collection.on('reset', this.renderData);
         Backbone.ModelBinding.bind(this);
+        this.codemirror();
+        this.model.fetch();
+        this.collection.on('reset', this.renderData);
+        this.model.on('change:code', this.compile);
     },
     
     codemirror: function() {
@@ -23,18 +26,25 @@ var Editor = Backbone.View.extend({
             lineNumbers: true,
             value: model.get('code'),
             onChange: function(editor, change) {
-                model.set({ code: editor.getValue() });
-                model.save();
+                model.save({ code: editor.getValue() });
             }
         });
     },
     
-    fetch: function() {
+    compile: function(model, code, options) {
+        console.log('Code changed:');
+        console.log(code);
+        this.template = Hogan.compile(this.model.get('code'));
+        return this.template;
+    },
+    
+    fetch: function(e) {
+        e.preventDefault();
         var url = this.getUrl(),
             model = this.model;
             collection = this.collection;
         
-        if (!username) return;
+        if (!url) return;
         jQuery.ajax({
             url: url,
             dataType: 'jsonp',
@@ -56,9 +66,18 @@ var Editor = Backbone.View.extend({
             params = {
                 screen_name: username,
                 include_rts: true,
-                include_entities: true
+                include_entities: true,
+                count: 5
             };
         return base + jQuery.param(params);
+    },
+    
+    render: function() {
+        var template = this.template || this.compile()
+            data = this.collection.toJSON();
+        
+        $('#rendered').html(template.render({ tweets: data }));
+        return this;
     },
     
     renderData: function() {

@@ -55,20 +55,20 @@ var Editor = Backbone.View.extend({
             view = this;
         
         if (!url) return;
-        jQuery.ajax({
+        jQuery.jsonp({
             url: url,
-            dataType: 'jsonp',
+            callbackParameter: 'callback',
             success: function(data) {
                 collection.reset(data);
             },
             
             error: function(options, status) {
-                this.showMessage(status, 'alert-error');
+                view.showMessage(status, 'alert-error');
             }
         });
     },
     
-    getUrl: function() {
+    getUrl: function(options) {
         var username = this.model.get('username');
         if (!username) return;
         var base = 'https://api.twitter.com/1/statuses/user_timeline.json?',
@@ -78,6 +78,7 @@ var Editor = Backbone.View.extend({
                 include_entities: true,
                 count: 5
             };
+            _.extend(params, options);
         return base + jQuery.param(params);
     },
     

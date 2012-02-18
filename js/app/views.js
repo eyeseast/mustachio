@@ -13,10 +13,14 @@ var Editor = Backbone.View.extend({
     initialize: function(options) {
         _.bindAll(this);
         Backbone.ModelBinding.bind(this);
-        this.codemirror();
-        this.model.fetch();
+        var mirror = this.codemirror();
         this.collection.on('reset', this.render);
         this.model.on('change:code', this.compile);
+        this.model.fetch({ 
+            success: function(model, attributes) {
+                mirror.setValue(model.get('code'));
+            }
+        });
     },
     
     codemirror: function() {
@@ -29,6 +33,7 @@ var Editor = Backbone.View.extend({
                 model.save({ code: editor.getValue() });
             }
         });
+        return this.mirror;
     },
     
     compile: function(model, code, options) {
@@ -45,20 +50,20 @@ var Editor = Backbone.View.extend({
     fetch: function(e) {
         e.preventDefault();
         var url = this.getUrl(),
-            model = this.model;
-            collection = this.collection;
+            model = this.model,
+            collection = this.collection,
+            view = this;
         
         if (!url) return;
         jQuery.ajax({
             url: url,
             dataType: 'jsonp',
             success: function(data) {
-                console.log('Fetched data from ' + url);
                 collection.reset(data);
             },
             
             error: function(options, status) {
-                console.log('Error! ' + status);
+                this.showMessage(status, 'alert-error');
             }
         });
     },

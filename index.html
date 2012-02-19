@@ -53,7 +53,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#">Mustachio</a>
+                <h1 class="brand">Mustachio</h1>
                 <div class="nav-collapse">
                     <ul class="nav">
                     </ul>
@@ -85,7 +85,8 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active well" id="rendered">
-                        Rendered content...
+                        <p>Hit <strong>Fetch</strong> to pull in recent tweets. 
+                            Use <a href="http://mustache.github.com/mustache.5.html">Mustache</a> templates to change how they're displayed.</p>
                     </div>
                     <div class="tab-pane" id="data">
                         <pre><code id="raw-data">Raw data...</code></pre>
@@ -105,7 +106,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="x-jst" id="default-template">
 {{#tweets}}
-    <p>{{text}}</p>
+    <p>{{{text}}}</p>
 {{/tweets}}
     </script>
     
@@ -128,13 +129,13 @@
     <script src="js/codemirror/mode/htmlmixed/htmlmixed.js"></script>
     
     <!-- the app itself -->
-    <script src="js/lib/sisyphus.min.js"></script>
     <script src="js/lib/underscore.js"></script>
     <script src="js/lib/backbone.js"></script>
     <script src="js/lib/backbone-localstorage.js"></script>
     <script src="js/lib/backbone.modelbinding.js"></script>
     <script src="js/lib/hogan-1.0.5.js"></script>
     <script src="js/lib/jquery.jsonp.js"></script>
+    <script src="js/lib/twitter-text.js"></script>
     
     <script src="js/app/mustache-mode.js"></script>
     <script src="js/app/models.js"></script>
